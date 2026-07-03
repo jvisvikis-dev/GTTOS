@@ -17,20 +17,23 @@ public class TaskManager : MonoBehaviour
             {
                 KillPlayer();
                 GiveAdviceOn(task);
+                UIManager.Instance.OpenEndGamePanel();
                 return false;
             }
         }
+        UIManager.Instance.SetResultText("You made it to the other side!");
         Debug.Log("All tasks done!");
         return true;
     }   
 
     public void GiveAdviceOn(Task task)
     {
-
+        UIManager.Instance.SetAdviceText(task.Advice);
     }
 
     public void KillPlayer()
     {
+        UIManager.Instance.SetResultText("You got run over!");
         Destroy(player.gameObject);
         Debug.Log("Failed Tasks");
     }
