@@ -1,16 +1,29 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TaskManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField] private List<Task> list = new();
 
-    // Update is called once per frame
-    void Update()
+    public bool allTasksDone()
     {
-        
+        foreach(Task task in list)
+        {
+            if (!task.isDone())
+            {
+                GiveAdviceOn(task);
+                return false;
+            }
+        }
+        return true;
+    }   
+
+    public void GiveAdviceOn(Task task)
+    {
+
     }
+    
 }
