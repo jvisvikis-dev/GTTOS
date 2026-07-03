@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class Task : MonoBehaviour
 {
-    public string taskID;
-    public string advice;
-    public bool[] flags;
+    [SerializeField] protected string taskID;
+    [SerializeField] protected string advice;
+    protected bool[] flags;
 
     public bool isDone()
     {

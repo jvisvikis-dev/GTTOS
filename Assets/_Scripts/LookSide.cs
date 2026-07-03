@@ -2,20 +2,24 @@ using UnityEngine;
 
 public class LookSide : Interactable
 {
-    [SerializeField] private LookBothWays task;
+    [SerializeField] private LookBothWays [] tasks;
     [SerializeField] private bool isRight = false;
+    [SerializeField] private Renderer material;
     private int lookCount = 0;
     private bool lookedAt = false;
 
     public void LookedAt()
     {
         lookedAt = true;
+        material.material.color = Color.green;
         lookCount++;
-        Debug.Log($"Looked at side {lookCount} times");
-        if(isRight)
-            task.LookedRight();
-        else
-            task.LookedLeft();
+        foreach (LookBothWays task in tasks)
+        {
+            if (isRight)
+                task.LookedRight(lookCount);
+            else
+                task.LookedLeft(lookCount);
+        }
     }
     public override void LookingAt()
     {
@@ -25,11 +29,9 @@ public class LookSide : Interactable
 
     public override void EndLooking()
     {
+        material.material.color = Color.red;
         lookedAt = false;
     }
 
-    public override void Use()
-    {
-        
-    }
+    public override void Use() { }
 }

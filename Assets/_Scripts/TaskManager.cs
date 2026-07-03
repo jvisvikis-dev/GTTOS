@@ -7,6 +7,7 @@ using UnityEngine;
 public class TaskManager : MonoBehaviour
 {
     [SerializeField] private List<Task> list = new();
+    [SerializeField] private PlayerController player;
 
     public bool allTasksDone()
     {
@@ -14,10 +15,12 @@ public class TaskManager : MonoBehaviour
         {
             if (!task.isDone())
             {
+                KillPlayer();
                 GiveAdviceOn(task);
                 return false;
             }
         }
+        Debug.Log("All tasks done!");
         return true;
     }   
 
@@ -25,5 +28,11 @@ public class TaskManager : MonoBehaviour
     {
 
     }
-    
+
+    public void KillPlayer()
+    {
+        Destroy(player.gameObject);
+        Debug.Log("Failed Tasks");
+    }
+
 }

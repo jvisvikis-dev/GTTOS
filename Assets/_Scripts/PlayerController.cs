@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _inputActions = new Controls();
-        //_inputActions.Player.Jump.performed += Jump;
+        _inputActions.Player.Jump.performed += Jump;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }

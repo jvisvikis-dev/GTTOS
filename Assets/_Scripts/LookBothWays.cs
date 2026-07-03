@@ -2,22 +2,27 @@ using UnityEngine;
 
 public class LookBothWays : Task
 {
+    [SerializeField] private int minLeftCount;
+    [SerializeField] private int minRightCount;
     private void Awake()
     {
-        taskID = "LookBothWays";
         flags = new bool[2];
     }
 
-    public void LookedLeft()
+    public void LookedLeft(int lookCount)
     {
-        Debug.Log("LookedLeft");
-        flags[0] = true;
+        if (lookCount >= minLeftCount)
+        {
+            flags[0] = true;
+        }
     }
 
-    public void LookedRight()
+    public void LookedRight(int lookCount)
     {
-        Debug.Log("LookedRight");
-        flags[1] = true;
+        if (lookCount >= minRightCount)
+        {
+            flags[1] = true;
+        }
     }
 
 }
