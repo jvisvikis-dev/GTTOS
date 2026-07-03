@@ -5,7 +5,7 @@ public class Task : MonoBehaviour
 {
     [SerializeField] protected string taskID;
     [SerializeField] protected string advice;
-    protected bool[] flags;
+    [SerializeField] protected bool[] flags;
 
     public bool isDone()
     {

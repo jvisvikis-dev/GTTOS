@@ -230,6 +230,7 @@ GameObject:
   - component: {fileID: 7430353582500453651}
   - component: {fileID: 1180924089434069754}
   - component: {fileID: 5883766767363214481}
+  - component: {fileID: 3918297937801789708}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -296,9 +297,25 @@ MonoBehaviour:
   gravity: -9.8
   speed: 5
   jumpForce: 1
-  groundCheckDistance: 0.2
+  groundCheckDistance: 1.2
   maxLookAngle: 90
   turnSpeed: 0.1
+--- !u!114 &3918297937801789708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3130399723679704352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f588a47c7fd04f43a56b66a51352492, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mask:
+    serializedVersion: 2
+    m_Bits: 8
+  cam: {fileID: 8348497149849909221}
 --- !u!1 &7623967683279377385
 GameObject:
   m_ObjectHideFlags: 0

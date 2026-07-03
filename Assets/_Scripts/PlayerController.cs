@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     private Controls _inputActions;
     private float verticalRotation = 0f;
     private Vector3 velocity = Vector3.zero;
+    public Action jump;
 
     private void Awake()
     {
@@ -39,6 +40,7 @@ public class PlayerController : MonoBehaviour
     private void OnEnable()
     {
         _inputActions.Enable();
+
     }
 
     private void OnDisable()
@@ -89,6 +91,7 @@ public class PlayerController : MonoBehaviour
 
     private void Jump(InputAction.CallbackContext context)
     {
+        jump?.Invoke();
         bool isGrounded = IsGrounded();
         if(isGrounded)
             velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
