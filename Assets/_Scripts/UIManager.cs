@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance => instance;
     [SerializeField] private TextMeshProUGUI ResultText;
     [SerializeField] private TextMeshProUGUI AdviceText;
+    [SerializeField] private TextMeshProUGUI interactableText;
     [SerializeField] private GameObject EndPanel;
 
     private void Awake()
@@ -17,6 +18,7 @@ public class UIManager : MonoBehaviour
         else
             Destroy(this.gameObject);
         EndPanel.gameObject.SetActive(false);
+        interactableText.text = "";
     }
     public void ReloadScene()
     {
@@ -37,5 +39,15 @@ public class UIManager : MonoBehaviour
     public void SetAdviceText(string text)
     {
         AdviceText.text = text;
+    }
+
+    public void SetInteractableText(string text)
+    {
+        interactableText.text = text;
+    }
+
+    public void ClearInteractableText()
+    {
+        interactableText.text = "";
     }
 }
