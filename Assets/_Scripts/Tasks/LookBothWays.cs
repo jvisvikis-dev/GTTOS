@@ -16,7 +16,9 @@ public class LookBothWays : Task
 
     private void Update()
     {
-        if(player.transform.rotation.eulerAngles.y < 140 && !isLookingLeft)
+        if (player == null)
+            return;
+        if (player.transform.rotation.eulerAngles.y < 140 && !isLookingLeft)
         {
             isLookingLeft = true;
             LookedLeft();

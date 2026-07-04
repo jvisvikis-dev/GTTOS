@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     private Controls _inputActions;
     private float verticalRotation = 0f;
     private Vector3 velocity = Vector3.zero;
+    private bool allowedMovement = true;
     public Action jump;
 
     private void Awake()
@@ -51,8 +52,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HandleMovement();
-        HandleRotation();
+        if (allowedMovement)
+        {
+            HandleMovement();
+            HandleRotation();
+        }
     }
 
     private Vector3 GetPlayerMovement()
@@ -100,5 +104,10 @@ public class PlayerController : MonoBehaviour
     private bool IsGrounded()
     {
         return Physics.Raycast(transform.position + Vector3.up * 0.03f, Vector3.down, groundCheckDistance);
+    }
+
+    public void ToggleAllowedMovement()
+    {
+        allowedMovement = !allowedMovement;
     }
 }
