@@ -8,6 +8,7 @@ public class TaskManager : MonoBehaviour
 {
     [SerializeField] private List<Task> list = new();
     [SerializeField] private PlayerController player;
+    public Action killPlayer;
 
     public bool allTasksDone()
     {
@@ -17,7 +18,6 @@ public class TaskManager : MonoBehaviour
             {
                 KillPlayer();
                 GiveAdviceOn(task);
-                UIManager.Instance.OpenEndGamePanel();
                 return false;
             }
         }
@@ -34,7 +34,7 @@ public class TaskManager : MonoBehaviour
     public void KillPlayer()
     {
         UIManager.Instance.SetResultText("You got run over!");
-        Destroy(player.gameObject);
+        killPlayer?.Invoke();
         Debug.Log("Failed Tasks");
     }
 

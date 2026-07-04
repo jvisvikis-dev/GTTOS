@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     [Header("References")]
     [SerializeField] private CharacterController controller;
     [SerializeField] private CinemachineCamera cam;
+    [SerializeField] private CinemachineCamera carLookCam;
+    [SerializeField] private TaskManager taskManager;
     [Header("MoveSettings")]
     [SerializeField] private float gravity = -9.8f;
     [SerializeField] private float speed = 5f;
@@ -41,12 +43,13 @@ public class PlayerController : MonoBehaviour
     private void OnEnable()
     {
         _inputActions.Enable();
-
+        taskManager.killPlayer += ToggleAllowedMovement;
     }
 
     private void OnDisable()
     {
         _inputActions.Disable();
+        taskManager.killPlayer -= ToggleAllowedMovement;
     }
 
     // Update is called once per frame
@@ -109,5 +112,13 @@ public class PlayerController : MonoBehaviour
     public void ToggleAllowedMovement()
     {
         allowedMovement = !allowedMovement;
+    }
+
+    public void LookAt(Vector3 targetPos)
+    {
+        var n = targetPos - cam.transform.position;
+        Quaternion endRotation = Quaternion.LookRotation(n);
+        carLookCam.transform.rotation = endRotation;
+        carLookCam.Priority = 10;
     }
 }
