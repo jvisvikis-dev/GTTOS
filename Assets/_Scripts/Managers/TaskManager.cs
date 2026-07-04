@@ -9,6 +9,7 @@ public class TaskManager : MonoBehaviour
     [SerializeField] private List<Task> list = new();
     [SerializeField] private PlayerController player;
     public Action killPlayer;
+    public Action stopForPlayer;
 
     public bool allTasksDone()
     {
@@ -23,6 +24,7 @@ public class TaskManager : MonoBehaviour
         }
         UIManager.Instance.SetResultText("You made it to the other side!");
         Debug.Log("All tasks done!");
+        stopForPlayer?.Invoke();
         return true;
     }   
 

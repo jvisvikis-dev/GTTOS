@@ -2,9 +2,14 @@ using UnityEngine;
 
 public class Road : MonoBehaviour
 {
-    [SerializeField] TaskManager taskManager;
+    [SerializeField] private TaskManager taskManager;
+    private bool triggered;
     private void OnTriggerEnter(Collider other)
     {
-        taskManager.allTasksDone();
+        if (!triggered)
+        {
+            triggered = true;
+            taskManager.allTasksDone();
+        }
     }
 }

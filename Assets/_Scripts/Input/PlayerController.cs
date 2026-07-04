@@ -44,12 +44,14 @@ public class PlayerController : MonoBehaviour
     {
         _inputActions.Enable();
         taskManager.killPlayer += ToggleAllowedMovement;
+        taskManager.stopForPlayer += ToggleAllowedMovement;
     }
 
     private void OnDisable()
     {
         _inputActions.Disable();
         taskManager.killPlayer -= ToggleAllowedMovement;
+        taskManager.stopForPlayer -= ToggleAllowedMovement;
     }
 
     // Update is called once per frame
@@ -120,5 +122,19 @@ public class PlayerController : MonoBehaviour
         Quaternion endRotation = Quaternion.LookRotation(n);
         carLookCam.transform.rotation = endRotation;
         carLookCam.Priority = 10;
+    }
+
+    public void SetCamera(bool playCamActive)
+    {
+        if (playCamActive)
+        {
+            carLookCam.Priority = -10;
+            cam.Priority = 10;
+        }
+        else
+        {
+            carLookCam.Priority = 10;
+            cam.Priority = -10;
+        }
     }
 }
