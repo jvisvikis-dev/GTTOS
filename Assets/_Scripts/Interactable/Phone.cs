@@ -49,6 +49,8 @@ public class Phone : Interactable
 
     private void Drop(InputAction.CallbackContext context)
     {
+        if (!inUse)
+            return;
         inUse = false;
         player.ToggleAllowedMovement();
         transform.position = _origPos;

@@ -8,6 +8,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using Unity.Cinemachine;
+using Unity.VisualScripting;
 
 public class PlayerController : MonoBehaviour
 
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private CinemachineCamera cam;
     [SerializeField] private CinemachineCamera carLookCam;
     [SerializeField] private TaskManager taskManager;
+    [SerializeField] private Transform itemHolder;
     [Header("MoveSettings")]
     [SerializeField] private float gravity = -9.8f;
     [SerializeField] private float speed = 5f;
@@ -27,6 +29,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float turnSpeed = 0.5f;
 
     private Controls _inputActions;
+    private Interactable itemInHand;
     private float verticalRotation = 0f;
     private Vector3 velocity = Vector3.zero;
     private bool allowedMovement = true;
@@ -36,8 +39,27 @@ public class PlayerController : MonoBehaviour
     {
         _inputActions = new Controls();
         _inputActions.Player.Jump.performed += Jump;
+        _inputActions.Player.Drop.performed += Drop;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+    public void PickUp(Interactable item)
+    {
+        itemInHand = item;
+        itemInHand.transform.position = itemHolder.position;
+        itemInHand.transform.parent = itemHolder.transform;
+        itemInHand.GetComponent<Rigidbody>().isKinematic = true;
+    }
+
+    private void Drop(InputAction.CallbackContext context)
+    {
+        if (itemInHand)
+        {
+            itemInHand.transform.parent = null;
+            itemInHand.GetComponent<Rigidbody>().isKinematic = false;
+            itemInHand = null;
+        }
     }
 
     private void OnEnable()
