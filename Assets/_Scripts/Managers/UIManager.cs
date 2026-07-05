@@ -6,10 +6,12 @@ public class UIManager : MonoBehaviour
 {
     private static UIManager instance;
     public static UIManager Instance => instance;
-    [SerializeField] private TextMeshProUGUI ResultText;
-    [SerializeField] private TextMeshProUGUI AdviceText;
+    [SerializeField] private TextMeshProUGUI resultText;
+    [SerializeField] private TextMeshProUGUI adviceText;
     [SerializeField] private TextMeshProUGUI interactableText;
-    [SerializeField] private GameObject EndPanel;
+    [SerializeField] private TextMeshProUGUI action1Text;
+    [SerializeField] private GameObject endPanel;
+    [SerializeField] private GameObject controlTexts;
 
     private void Awake()
     {
@@ -17,7 +19,7 @@ public class UIManager : MonoBehaviour
             instance = this;
         else
             Destroy(this.gameObject);
-        EndPanel.gameObject.SetActive(false);
+        endPanel.gameObject.SetActive(false);
         interactableText.text = "";
     }
     public void ReloadScene()
@@ -28,17 +30,17 @@ public class UIManager : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        EndPanel.SetActive(true);
+        endPanel.SetActive(true);
     }
 
     public void SetResultText(string text)
     {
-        ResultText.text = text;
+        resultText.text = text;
     }
 
     public void SetAdviceText(string text)
     {
-        AdviceText.text = text;
+        adviceText.text = text;
     }
 
     public void SetInteractableText(string text)
@@ -49,5 +51,16 @@ public class UIManager : MonoBehaviour
     public void ClearInteractableText()
     {
         interactableText.text = "";
+    }
+
+    public void OpenControls(string action)
+    {
+        controlTexts.SetActive(true);
+        action1Text.text = action;
+    }
+
+    public void CloseControls()
+    {
+        controlTexts.SetActive(false);
     }
 }

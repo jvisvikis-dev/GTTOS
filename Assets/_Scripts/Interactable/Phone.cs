@@ -55,6 +55,7 @@ public class Phone : Interactable
         player.ToggleAllowedMovement();
         transform.position = _origPos;
         transform.rotation = _origRot;
+        UIManager.Instance.CloseControls();
     }
 
     public override void Use()
@@ -63,6 +64,7 @@ public class Phone : Interactable
         player.ToggleAllowedMovement();
         transform.position = phonePlacement.position;
         transform.rotation = phonePlacement.rotation;
+        UIManager.Instance.OpenControls("Call Mum");
     }
 
     public IEnumerator WaitForCallToEnd(float time, bool isMum)

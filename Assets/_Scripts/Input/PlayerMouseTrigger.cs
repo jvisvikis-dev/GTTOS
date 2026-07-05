@@ -43,6 +43,10 @@ public class PlayerMouseTrigger : MonoBehaviour
         {
             StopLookingAtInteractable();
         }
+        else
+        {
+            UIManager.Instance.ClearInteractableText();
+        }
         
     }
 

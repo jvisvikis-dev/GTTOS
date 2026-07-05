@@ -8,10 +8,14 @@ public abstract class Interactable : MonoBehaviour
     public abstract void Use();
     public void LookingAt()
     {
-        UIManager.Instance.SetInteractableText(InteractableUIText);
+        if(isClickable)
+            UIManager.Instance.SetInteractableText(InteractableUIText);
+        else
+            UIManager.Instance.ClearInteractableText();
     }
     public void EndLooking()
     {
+        isClickable = true;
         UIManager.Instance.ClearInteractableText();
     }
 }
