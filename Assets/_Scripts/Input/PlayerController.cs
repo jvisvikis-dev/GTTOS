@@ -27,6 +27,9 @@ public class PlayerController : MonoBehaviour
     [Header("LookSettings")]
     [SerializeField] private float maxLookAngle = 90f;
     [SerializeField] private float turnSpeed = 0.5f;
+    [Header("Misc")]
+    [SerializeField] private float equipTime = 0.5f;
+    [SerializeField] private AnimationCurve equipCurve;
 
     private Controls _inputActions;
     private Interactable itemInHand;
@@ -42,24 +45,6 @@ public class PlayerController : MonoBehaviour
         _inputActions.Player.Drop.performed += Drop;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-    }
-
-    public void PickUp(Interactable item)
-    {
-        itemInHand = item;
-        itemInHand.transform.position = itemHolder.position;
-        itemInHand.transform.parent = itemHolder.transform;
-        itemInHand.GetComponent<Rigidbody>().isKinematic = true;
-    }
-
-    private void Drop(InputAction.CallbackContext context)
-    {
-        if (itemInHand)
-        {
-            itemInHand.transform.parent = null;
-            itemInHand.GetComponent<Rigidbody>().isKinematic = false;
-            itemInHand = null;
-        }
     }
 
     private void OnEnable()
@@ -138,6 +123,36 @@ public class PlayerController : MonoBehaviour
         allowedMovement = !allowedMovement;
     }
 
+    public void PickUp(Interactable item, Vector3 posOffset = new Vector3(), Vector3 rotation = new Vector3())
+    {
+        if (itemInHand)
+            Drop();
+        itemInHand = item;
+        itemInHand.GetComponent<Rigidbody>().isKinematic = true;
+        StartCoroutine(EquipLerp(posOffset, rotation));
+    }
+
+    public void ClearItemInHand()
+    {
+        Destroy(itemInHand.gameObject);
+        itemInHand = null;
+    }
+
+    private void Drop(InputAction.CallbackContext context)
+    {
+        Drop();
+    }
+
+    private void Drop()
+    {
+        if (itemInHand)
+        {
+            itemInHand.transform.parent = null;
+            itemInHand.GetComponent<Rigidbody>().isKinematic = false;
+            itemInHand = null;
+        }
+    }
+
     public void LookAt(Vector3 targetPos)
     {
         var n = targetPos - cam.transform.position;
@@ -166,6 +181,22 @@ public class PlayerController : MonoBehaviour
             return false;
         
         return itemInHand.CompareTag("Fish");
-        
+    }
+
+    public IEnumerator EquipLerp(Vector3 posOffset, Vector3 rotation)
+    {
+        itemInHand.transform.parent = itemHolder.transform;
+        Vector3 startPos = itemInHand.transform.localPosition;
+        Vector3 endPos = Vector3.zero + posOffset;
+        Quaternion startRot = itemInHand.transform.rotation;
+        Quaternion endRot = Quaternion.Euler(rotation);
+        float timer = 0;
+        while(timer/equipTime < 1 && itemInHand)
+        {
+            itemInHand.transform.localPosition = Vector3.Lerp(startPos, endPos, equipCurve.Evaluate(timer / equipTime));
+            itemInHand.transform.localRotation = Quaternion.Lerp(startRot, endRot, equipCurve.Evaluate(timer / equipTime));
+            timer += Time.deltaTime;
+            yield return null;
+        }
     }
 }

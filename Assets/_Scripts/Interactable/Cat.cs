@@ -14,6 +14,8 @@ public class Cat : Interactable
         if(player && player.HasFish())
         {
             animator.SetTrigger("backflip");
+            player.ClearItemInHand();
+            //Clear Task
         }
         else
         {
@@ -31,7 +33,7 @@ public class Cat : Interactable
             agent.destination = agent.transform.position;
         }
         var n = Vector3.zero;
-        if (!running)
+        if (!running && player)
             n = player.transform.position - transform.position;
         else
             n = agent.destination - transform.position;

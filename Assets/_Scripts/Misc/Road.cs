@@ -6,7 +6,7 @@ public class Road : MonoBehaviour
     private bool triggered;
     private void OnTriggerEnter(Collider other)
     {
-        if (!triggered)
+        if (!triggered && other.CompareTag("Player"))
         {
             triggered = true;
             taskManager.allTasksDone();
