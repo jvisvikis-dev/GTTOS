@@ -1055,6 +1055,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8928116012005070630, guid: 4a378afb8de68044f986ae019d0f10ac, type: 3}
   m_PrefabInstance: {fileID: 1913137402}
   m_PrefabAsset: {fileID: 0}
+--- !u!120 &170413155 stripped
+LineRenderer:
+  m_CorrespondingSourceObject: {fileID: 8528123033676105047, guid: 926b98c774b1fef478c07a0707a73806, type: 3}
+  m_PrefabInstance: {fileID: 4756457314422207987}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &177008111 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3027071335612513535, guid: 23aeb96941b49fb49befd2058dd75b79, type: 3}
@@ -12857,6 +12862,10 @@ PrefabInstance:
       propertyPath: fishPrefab
       value: 
       objectReference: {fileID: 5127113730955290149, guid: 1a4cb4238f6b1cc469e1cfe5dbef1da9, type: 3}
+    - target: {fileID: 236535613224729589, guid: 926b98c774b1fef478c07a0707a73806, type: 3}
+      propertyPath: lineRenderer
+      value: 
+      objectReference: {fileID: 170413155}
     - target: {fileID: 2507425737604967698, guid: 926b98c774b1fef478c07a0707a73806, type: 3}
       propertyPath: m_Name
       value: SplashParticles

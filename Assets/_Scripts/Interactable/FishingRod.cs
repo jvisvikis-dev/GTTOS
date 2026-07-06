@@ -18,11 +18,13 @@ public class FishingRod : Interactable
     [SerializeField] private GameObject bobberHome;
     [SerializeField] private ParticleSystem splashParticles;
     [SerializeField] private Interactable fishPrefab;
+    [SerializeField] private LineRenderer lineRenderer;
 
     private Controls _inputActions;
     private bool bobberCasted;
     private bool isActive;
     private bool fishReady;
+    private bool bobberHitWater;
     private void Awake()
     {
         _inputActions = new Controls();
@@ -42,20 +44,30 @@ public class FishingRod : Interactable
         }
         else
         {
+           
             animator.SetBool("Fishing", false);
             splashParticles.Stop();
+            bobberHitWater = false;
             bobberCasted = false;
             bobberRB.isKinematic = true;
             bobber.transform.parent = bobberHome.transform;
-            bobberRB.transform.position = bobberHome.transform.position;
+            bobber.transform.localPosition = Vector3.zero;
+            bobber.transform.localRotation = Quaternion.identity;
             if (fishReady)
             {
                 fishReady = false;
                 Interactable fish = Instantiate(fishPrefab,bobber.transform);
                 fish.transform.parent = null;
                 player.PickUp(fish);
+                isActive = false;
             }
         }
+    }
+
+    private void Update()
+    {
+        lineRenderer.SetPosition(0, bobberHome.transform.position);
+        lineRenderer.SetPosition(1, bobber.transform.position);
     }
 
     private void OnEnable()
@@ -78,6 +90,9 @@ public class FishingRod : Interactable
 
     public void BobberHitWater(Vector3 hitPos)
     {
+        if (bobberHitWater || !isActive)
+            return;
+        bobberHitWater = true;
         animator.SetBool("Fishing", true);
         bobberRB.position = hitPos;
         bobberRB.isKinematic = true;
@@ -87,6 +102,7 @@ public class FishingRod : Interactable
 
     public void ReadyToCatch()
     {
+        Debug.Log("FishReady");
         splashParticles.Play();
         fishReady = true;
     }
