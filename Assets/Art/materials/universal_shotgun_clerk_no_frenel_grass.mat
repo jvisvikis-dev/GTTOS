@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: universal_shotgun_clerk_no_frenel_grass
+  m_Shader: {fileID: -6465566751694194690, guid: 792f7b46941ee564cada19c543032d39, type: 3}
+  m_Parent: {fileID: 2100000, guid: 6893b17fac3df5340a2178d51b9e5132, type: 2}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords:
+  - _EMISSION
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses:
+  - MOTIONVECTORS
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _Triplanar_Texture:
+        m_Texture: {fileID: 2800000, guid: 2ec2e607f6ae558429342f476b372f46, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Colour_Power: 0.98
+    - _Frenel_Power: 100.2
+    - _Texture_Intensity: 1.12
+    - _Tiling: 0.31
+    - _Triplanar_Texture_1: 1
+    m_Colors:
+    - _Frenel_Colour: {r: 0.23584908, g: 0.21248667, b: 0.21248667, a: 0}
+    - _Shadow_Colour: {r: 0.8490566, g: 0.8490566, b: 0.8490566, a: 0}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
+--- !u!114 &6995639905809867224
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 10
