@@ -159,4 +159,13 @@ public class PlayerController : MonoBehaviour
             cam.Priority = -10;
         }
     }
+
+    public bool HasFish()
+    {
+        if (!itemInHand)
+            return false;
+        
+        return itemInHand.CompareTag("Fish");
+        
+    }
 }
