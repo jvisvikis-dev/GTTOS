@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -7,6 +8,7 @@ public class Cat : Interactable
     [SerializeField] private PlayerController player;
     [SerializeField] private GameObject[] runAwaySpots;
     [SerializeField] private NavMeshAgent agent;
+    public Action catFed;
     private int spotIdx = 0;
     private bool running = false;
     public override void Use()
@@ -26,6 +28,11 @@ public class Cat : Interactable
 
     private void Update()
     {
+        if (player && player.HasFish())
+            InteractableUIText = "Give";
+        else
+            InteractableUIText = "Pet";
+
         if (agent.remainingDistance <= 0.01f)
         {
             running = false;

@@ -5230,6 +5230,8 @@ MonoBehaviour:
   InteractableUIText: Pick Up
   pickUpOffset: {x: 0.39, y: -0.268, z: -0.066}
   pickUpRotation: {x: -62.614, y: -215.351, z: 302.384}
+  fishOffset: {x: -0.025, y: 0.028, z: -0.489}
+  fishRotation: {x: -56.019, y: -1.098, z: 92.244}
   castForce: 5
   minWaitTime: 1
   maxWaitTime: 5
@@ -5239,8 +5241,8 @@ MonoBehaviour:
   bobberRB: {fileID: 3948389842805161910}
   bobberHome: {fileID: 8471323540141556220}
   splashParticles: {fileID: 904636628691264390}
-  fishPrefab: {fileID: 0}
-  lineRenderer: {fileID: 0}
+  fishPrefab: {fileID: 5127113730955290149, guid: 1a4cb4238f6b1cc469e1cfe5dbef1da9, type: 3}
+  lineRenderer: {fileID: 8528123033676105047}
 --- !u!54 &6852421362137070786
 Rigidbody:
   m_ObjectHideFlags: 0

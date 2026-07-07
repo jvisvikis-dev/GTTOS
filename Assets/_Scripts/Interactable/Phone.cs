@@ -8,6 +8,8 @@ public class Phone : Interactable
     [SerializeField] private PlayerController player;
     [SerializeField] private Transform phonePlacement;
     [SerializeField] private AudioClip mumCall;
+    [SerializeField] private AnimationCurve equipCurve;
+    [SerializeField] private float timeToEquip = 0.5f;
 
     private Controls _inputActions;
     private Vector3 _origPos;
@@ -53,8 +55,7 @@ public class Phone : Interactable
             return;
         inUse = false;
         player.ToggleAllowedMovement();
-        transform.position = _origPos;
-        transform.rotation = _origRot;
+        StartCoroutine(MovePhoneOverTime(_origPos, _origRot));
         UIManager.Instance.CloseControls();
     }
 
@@ -62,8 +63,7 @@ public class Phone : Interactable
     {
         inUse = true;
         player.ToggleAllowedMovement();
-        transform.position = phonePlacement.position;
-        transform.rotation = phonePlacement.rotation;
+        StartCoroutine(MovePhoneOverTime(phonePlacement.position, phonePlacement.rotation));
         UIManager.Instance.OpenControls("Call Mum");
     }
 
@@ -73,6 +73,20 @@ public class Phone : Interactable
         onPhone = false;
         if(isMum)
             calledMum?.Invoke();
+    }
+
+    public IEnumerator MovePhoneOverTime(Vector3 pos, Quaternion rot)
+    {
+        float timer = 0f;
+        Vector3 startPos = transform.position;
+        Quaternion startRot = transform.rotation;
+        while(timer < timeToEquip)
+        {
+            transform.position = Vector3.Lerp(startPos,pos,equipCurve.Evaluate(timer/timeToEquip));
+            transform.rotation = Quaternion.Lerp(startRot, rot, equipCurve.Evaluate(timer / timeToEquip));
+            timer += Time.deltaTime;    
+            yield return null;
+        }
     }
 
 

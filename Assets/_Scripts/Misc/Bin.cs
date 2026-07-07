@@ -16,6 +16,7 @@ public class Bin : MonoBehaviour
         if(other != null && other.tag == "Rubbish")
         {
             rubbishCount++;
+            Debug.Log("Trash collected");
             if(rubbishCount >= maxRubbish)
             {
                 Debug.Log("All trash collected");

@@ -7,6 +7,8 @@ public class FishingRod : Interactable
 {
     [SerializeField] private Vector3 pickUpOffset;
     [SerializeField] private Vector3 pickUpRotation;
+    [SerializeField] private Vector3 fishOffset;
+    [SerializeField] private Vector3 fishRotation;
     [SerializeField] private float castForce = 5f;
     [SerializeField] private float minWaitTime = 1f;
     [SerializeField] private float maxWaitTime = 5f;
@@ -44,7 +46,14 @@ public class FishingRod : Interactable
         }
         else
         {
-           
+            if (fishReady)
+            {
+                fishReady = false;
+                Interactable fish = Instantiate(fishPrefab,bobber.transform);
+                fish.transform.parent = null;
+                player.PickUp(fish,fishOffset,fishRotation);
+                isActive = false;
+            }
             animator.SetBool("Fishing", false);
             splashParticles.Stop();
             bobberHitWater = false;
@@ -53,14 +62,6 @@ public class FishingRod : Interactable
             bobber.transform.parent = bobberHome.transform;
             bobber.transform.localPosition = Vector3.zero;
             bobber.transform.localRotation = Quaternion.identity;
-            if (fishReady)
-            {
-                fishReady = false;
-                Interactable fish = Instantiate(fishPrefab,bobber.transform);
-                fish.transform.parent = null;
-                player.PickUp(fish);
-                isActive = false;
-            }
         }
     }
 
@@ -102,7 +103,6 @@ public class FishingRod : Interactable
 
     public void ReadyToCatch()
     {
-        Debug.Log("FishReady");
         splashParticles.Play();
         fishReady = true;
     }
