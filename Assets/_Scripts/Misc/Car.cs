@@ -7,6 +7,7 @@ public class Car : MonoBehaviour
     [SerializeField] private TaskManager taskManager;
     [SerializeField] private float crashTime;
     [SerializeField] private AnimationCurve carStoppingCurve;
+    [SerializeField] private AudioClip scream;
     private Vector3 origPos;
     private float timer;
 
@@ -70,7 +71,8 @@ public class Car : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other != null && other.GetComponent<PlayerController>()) 
-        { 
+        {
+            AudioManager.Instance.Play2DSound(scream);
             Destroy(other.gameObject);
             UIManager.Instance.OpenEndGamePanel();
         }

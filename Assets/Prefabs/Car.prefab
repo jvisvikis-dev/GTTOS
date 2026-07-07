@@ -73,6 +73,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  scream: {fileID: 8300000, guid: 2153d1afd13699241b62134d0bcc264a, type: 3}
 --- !u!65 &250066879332080457
 BoxCollider:
   m_ObjectHideFlags: 0
