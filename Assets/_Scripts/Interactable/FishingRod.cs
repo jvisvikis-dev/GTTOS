@@ -9,12 +9,14 @@ public class FishingRod : Interactable
     [SerializeField] private Vector3 pickUpRotation;
     [SerializeField] private Vector3 fishOffset;
     [SerializeField] private Vector3 fishRotation;
+    [SerializeField] private float castUpwardsForce = 2f;
     [SerializeField] private float castForce = 5f;
     [SerializeField] private float minWaitTime = 1f;
     [SerializeField] private float maxWaitTime = 5f;
     [Header("References")]
     [SerializeField] private PlayerController player;
-    [SerializeField] private Animator animator;
+    [SerializeField] private Animator bobberAnimator;
+    [SerializeField] private Animator rodAnimator;
     [SerializeField] private Bobber bobber;
     [SerializeField] private Rigidbody bobberRB;
     [SerializeField] private GameObject bobberHome;
@@ -42,7 +44,8 @@ public class FishingRod : Interactable
         {
             bobberCasted = true;
             bobberRB.isKinematic = false;
-            bobberRB.AddForce((player.transform.forward - (player.transform.right/4)).normalized * castForce, ForceMode.Impulse);
+            bobberRB.AddForce((player.transform.forward).normalized * castForce + player.transform.up*castUpwardsForce, ForceMode.Impulse);
+            rodAnimator.SetBool("isCasted", bobberCasted);
         }
         else
         {
@@ -54,14 +57,15 @@ public class FishingRod : Interactable
                 player.PickUp(fish,fishOffset,fishRotation);
                 isActive = false;
             }
-            animator.SetBool("Fishing", false);
-            splashParticles.Stop();
             bobberHitWater = false;
             bobberCasted = false;
             bobberRB.isKinematic = true;
+            bobberAnimator.SetBool("Fishing", bobberCasted);
+            splashParticles.Stop();
             bobber.transform.parent = bobberHome.transform;
             bobber.transform.localPosition = Vector3.zero;
             bobber.transform.localRotation = Quaternion.identity;
+            rodAnimator.SetBool("isCasted", bobberCasted);
         }
     }
 
@@ -94,7 +98,7 @@ public class FishingRod : Interactable
         if (bobberHitWater || !isActive)
             return;
         bobberHitWater = true;
-        animator.SetBool("Fishing", true);
+        bobberAnimator.SetBool("Fishing", true);
         bobberRB.position = hitPos;
         bobberRB.isKinematic = true;
         bobber.transform.parent = null;
@@ -116,6 +120,7 @@ public class FishingRod : Interactable
             timer += Time.deltaTime;
             yield return null;
         }
-        ReadyToCatch();
+        if(bobberCasted)
+            ReadyToCatch();
     }
 }

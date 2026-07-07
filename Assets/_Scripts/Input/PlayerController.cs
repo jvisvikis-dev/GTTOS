@@ -130,6 +130,7 @@ public class PlayerController : MonoBehaviour
         itemInHand = item;
         itemInHand.GetComponent<Rigidbody>().isKinematic = true;
         StartCoroutine(EquipLerp(posOffset, rotation));
+        UIManager.Instance.OpenControls(null, true);
     }
 
     public void ClearItemInHand()

@@ -10,8 +10,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI adviceText;
     [SerializeField] private TextMeshProUGUI interactableText;
     [SerializeField] private TextMeshProUGUI action1Text;
+    [SerializeField] private TextMeshProUGUI exitText;
     [SerializeField] private GameObject endPanel;
     [SerializeField] private GameObject controlTexts;
+    [SerializeField] private GameObject action1Control;
 
     private void Awake()
     {
@@ -53,10 +55,22 @@ public class UIManager : MonoBehaviour
         interactableText.text = "";
     }
 
-    public void OpenControls(string action)
+    public void OpenControls(string action = null, bool onlyExit = false)
     {
         controlTexts.SetActive(true);
-        action1Text.text = action;
+        if (onlyExit)
+        {
+            action1Text.gameObject.SetActive(false);
+            action1Control.SetActive(false);
+            exitText.text = "Drop";
+        }
+        else
+        {
+            action1Text.gameObject.SetActive(true);
+            action1Control.SetActive(true);
+            action1Text.text = action;
+            exitText.text = "Exit";
+        }
     }
 
     public void CloseControls()
