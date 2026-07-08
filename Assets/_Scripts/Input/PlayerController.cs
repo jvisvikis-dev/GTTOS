@@ -43,8 +43,13 @@ public class PlayerController : MonoBehaviour
         _inputActions = new Controls();
         _inputActions.Player.Jump.performed += Jump;
         _inputActions.Player.Drop.performed += Drop;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+    }
+
+    private void Start()
+    {
+        if (MainMenuManager.Instance.LoadMainMenu)
+            ToggleAllowedMovement();
+        UIManager.Instance.play += ToggleAllowedMovement;
     }
 
     private void OnEnable()
@@ -59,6 +64,7 @@ public class PlayerController : MonoBehaviour
         _inputActions.Disable();
         taskManager.killPlayer -= ToggleAllowedMovement;
         taskManager.stopForPlayer -= ToggleAllowedMovement;
+        UIManager.Instance.play -= ToggleAllowedMovement;
     }
 
     // Update is called once per frame

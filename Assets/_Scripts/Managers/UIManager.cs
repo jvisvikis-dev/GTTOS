@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -14,6 +15,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject endPanel;
     [SerializeField] private GameObject controlTexts;
     [SerializeField] private GameObject action1Control;
+    [SerializeField] private GameObject mainMenuPanel;
+
+    public Action play;
 
     private void Awake()
     {
@@ -23,7 +27,25 @@ public class UIManager : MonoBehaviour
             Destroy(this.gameObject);
         endPanel.gameObject.SetActive(false);
         interactableText.text = "";
+        if (MainMenuManager.Instance.LoadMainMenu)
+            OpenMainMenu();
+        else
+            CloseMainMenu();
+        
     }
+
+    public void Retry()
+    {
+        MainMenuManager.Instance.SetMenuOnLoad(false);
+        ReloadScene();
+    }
+
+    public void BackToMain()
+    {
+        MainMenuManager.Instance.SetMenuOnLoad(true);
+        ReloadScene();
+    }
+
     public void ReloadScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -76,5 +98,25 @@ public class UIManager : MonoBehaviour
     public void CloseControls()
     {
         controlTexts.SetActive(false);
+    }
+
+    private void OpenMainMenu()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        mainMenuPanel.SetActive(true);
+    }
+
+    private void CloseMainMenu()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        mainMenuPanel.SetActive(false);
+    }
+
+    public void PlayGame()
+    {
+        CloseMainMenu();
+        play?.Invoke();
     }
 }

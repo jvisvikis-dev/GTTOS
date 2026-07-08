@@ -8,12 +8,14 @@ public class Car : MonoBehaviour
     [SerializeField] private float crashTime;
     [SerializeField] private AnimationCurve carStoppingCurve;
     [SerializeField] private AudioClip scream;
+    [SerializeField] private GameObject carModel;
     private Vector3 origPos;
     private float timer;
 
     private void Awake()
     {
         origPos = transform.position;
+        carModel.SetActive(false);
     }
 
     private void OnEnable()
@@ -30,12 +32,14 @@ public class Car : MonoBehaviour
 
     private void CrashIntoPlayer()
     {
+        carModel.SetActive(true);
         player.LookAt(transform.position);
         StartCoroutine(MoveToPlayer());
     }
 
     private void StopBeforePlayer()
     {
+        carModel.SetActive(true);
         player.LookAt(transform.position);
         StartCoroutine(MoveToBeforePlayer());
     }
@@ -73,6 +77,7 @@ public class Car : MonoBehaviour
         if (other != null && other.GetComponent<PlayerController>()) 
         {
             AudioManager.Instance.Play2DSound(scream);
+            AudioManager.Instance.StopBackgroundMusic();
             Destroy(other.gameObject);
             UIManager.Instance.OpenEndGamePanel();
         }

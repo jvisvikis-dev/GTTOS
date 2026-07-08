@@ -74,6 +74,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   scream: {fileID: 8300000, guid: 2153d1afd13699241b62134d0bcc264a, type: 3}
+  carModel: {fileID: 6186482485748766736}
 --- !u!65 &250066879332080457
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -196,6 +197,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a3b6f8f8e11eee4e9268588b8b26174, type: 3}
+--- !u!1 &6186482485748766736 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9a3b6f8f8e11eee4e9268588b8b26174, type: 3}
+  m_PrefabInstance: {fileID: 6420906954120897857}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6814260316542288554 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9a3b6f8f8e11eee4e9268588b8b26174, type: 3}

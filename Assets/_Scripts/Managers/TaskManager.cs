@@ -22,7 +22,8 @@ public class TaskManager : MonoBehaviour
                 return false;
             }
         }
-        UIManager.Instance.SetResultText("You made it to the other side!");
+        UIManager.Instance.SetResultText("<color=green>You made it!");
+        UIManager.Instance.SetAdviceText("Now you know how to safely cross the road! \nStay safe out there");
         Debug.Log("All tasks done!");
         stopForPlayer?.Invoke();
         return true;
@@ -35,7 +36,7 @@ public class TaskManager : MonoBehaviour
 
     public void KillPlayer()
     {
-        UIManager.Instance.SetResultText("You got run over!");
+        UIManager.Instance.SetResultText("<color=red>You got run over!");
         killPlayer?.Invoke();
         Debug.Log("Failed Tasks");
     }
