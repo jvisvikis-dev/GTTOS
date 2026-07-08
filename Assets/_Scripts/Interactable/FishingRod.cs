@@ -23,6 +23,8 @@ public class FishingRod : Interactable
     [SerializeField] private ParticleSystem splashParticles;
     [SerializeField] private Interactable fishPrefab;
     [SerializeField] private LineRenderer lineRenderer;
+    [SerializeField] private AudioClip castingSFX;
+    [SerializeField] private AudioClip bobberHitWaterSFX;
 
     private Controls _inputActions;
     private bool bobberCasted;
@@ -46,6 +48,7 @@ public class FishingRod : Interactable
             bobberRB.isKinematic = false;
             bobberRB.AddForce((player.transform.forward).normalized * castForce + player.transform.up*castUpwardsForce, ForceMode.Impulse);
             rodAnimator.SetBool("isCasted", bobberCasted);
+            AudioManager.Instance.Play3DSound(transform.position, castingSFX);
         }
         else
         {
@@ -102,6 +105,7 @@ public class FishingRod : Interactable
         bobberRB.position = hitPos;
         bobberRB.isKinematic = true;
         bobber.transform.parent = null;
+        AudioManager.Instance.Play3DSound(bobber.transform.position,bobberHitWaterSFX);
         StartCoroutine(WaitForFish());
     }
 

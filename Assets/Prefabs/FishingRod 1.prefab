@@ -67,6 +67,8 @@ MonoBehaviour:
   splashParticles: {fileID: 2554750690154931018}
   fishPrefab: {fileID: 5127113730955290149, guid: 1a4cb4238f6b1cc469e1cfe5dbef1da9, type: 3}
   lineRenderer: {fileID: 7352379836717725312}
+  castingSFX: {fileID: 8300000, guid: 0671d4d663844ce4a80925344801b5e9, type: 3}
+  bobberHitWaterSFX: {fileID: 8300000, guid: b56cfa4e9e7954b4aafb01acabc6c517, type: 3}
 --- !u!54 &7695254261188723297
 Rigidbody:
   m_ObjectHideFlags: 0

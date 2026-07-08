@@ -8,6 +8,7 @@ public class Cat : Interactable
     [SerializeField] private PlayerController player;
     [SerializeField] private GameObject[] runAwaySpots;
     [SerializeField] private NavMeshAgent agent;
+    [SerializeField] private AudioClip meowSFX;
     public Action catFed;
     private int spotIdx = 0;
     private bool running = false;
@@ -17,7 +18,7 @@ public class Cat : Interactable
         {
             animator.SetTrigger("backflip");
             player.ClearItemInHand();
-            //Clear Task
+            catFed?.Invoke();
         }
         else
         {
@@ -56,6 +57,7 @@ public class Cat : Interactable
         agent.SetDestination(spot);
         running = true;
         animator.SetBool("running", running);
+        AudioManager.Instance.Play3DSound(transform.position, meowSFX);
     }
 
 }

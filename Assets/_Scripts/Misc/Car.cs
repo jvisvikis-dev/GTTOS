@@ -6,7 +6,10 @@ public class Car : MonoBehaviour
     [SerializeField] private PlayerController player;
     [SerializeField] private TaskManager taskManager;
     [SerializeField] private float crashTime;
+    [SerializeField] private AnimationCurve carHittingCurve;
     [SerializeField] private AnimationCurve carStoppingCurve;
+    [SerializeField] private AudioClip carStopClip;
+    [SerializeField] private AudioClip carMoveClip;
     [SerializeField] private AudioClip scream;
     [SerializeField] private GameObject carModel;
     private Vector3 origPos;
@@ -45,11 +48,12 @@ public class Car : MonoBehaviour
     }
     public IEnumerator MoveToPlayer()
     {
+        AudioManager.Instance.Play2DSound(carMoveClip);
         yield return new WaitForSeconds(0.5f);
         while (timer < crashTime && player)
         {
             timer += Time.deltaTime;
-            float x = Mathf.Lerp(origPos.x, player.transform.position.x, timer / crashTime);
+            float x = Mathf.Lerp(origPos.x, player.transform.position.x, carHittingCurve.Evaluate(timer / crashTime));
             transform.position = new Vector3(x, transform.position.y, transform.position.z);
             yield return null;
         }
@@ -58,6 +62,7 @@ public class Car : MonoBehaviour
     public IEnumerator MoveToBeforePlayer()
     {
         Debug.Log("Stop before the player");
+        AudioManager.Instance.Play2DSound(carStopClip);
         yield return new WaitForSeconds(0.5f);
         while (timer < crashTime && player)
         {
