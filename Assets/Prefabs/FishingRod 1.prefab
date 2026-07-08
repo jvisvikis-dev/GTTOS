@@ -56,8 +56,8 @@ MonoBehaviour:
   fishRotation: {x: -56.019, y: -1.098, z: 92.244}
   castUpwardsForce: 5
   castForce: 5
-  minWaitTime: 1
-  maxWaitTime: 5
+  minWaitTime: 5
+  maxWaitTime: 10
   player: {fileID: 0}
   bobberAnimator: {fileID: 3565687462517840692}
   rodAnimator: {fileID: 2222694236397699491}

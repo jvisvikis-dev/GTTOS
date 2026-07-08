@@ -75,7 +75,7 @@ public class FishingRod : Interactable
     private void Update()
     {
         lineRenderer.SetPosition(0, bobberHome.transform.position);
-        lineRenderer.SetPosition(1, bobber.transform.position);
+        lineRenderer.SetPosition(1, bobber.Mesh.transform.position);
     }
 
     private void OnEnable()

@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private CinemachineCamera carLookCam;
     [SerializeField] private TaskManager taskManager;
     [SerializeField] private Transform itemHolder;
+    [SerializeField] private AudioClip jumpSFX;
     [Header("MoveSettings")]
     [SerializeField] private float gravity = -9.8f;
     [SerializeField] private float speed = 5f;
@@ -115,8 +116,11 @@ public class PlayerController : MonoBehaviour
     {
         jump?.Invoke();
         bool isGrounded = IsGrounded();
-        if(isGrounded)
+        if (isGrounded)
+        {
             velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
+            AudioManager.Instance.Play2DSound(jumpSFX);
+        }
     }
 
     private bool IsGrounded()

@@ -8874,6 +8874,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   list:
   - {fileID: 1869113317}
+  - {fileID: 313583595}
+  - {fileID: 1377314636}
+  - {fileID: 266595}
+  - {fileID: 70641257}
+  - {fileID: 1601089725}
+  - {fileID: 454546941}
+  - {fileID: 980378396}
+  - {fileID: 593779303}
   player: {fileID: 1668822441}
 --- !u!4 &1539789335
 Transform:
@@ -8899,6 +8907,11 @@ Transform:
   - {fileID: 593779302}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1546854565 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 985003562977155345, guid: e81c452067719094988207af10da5d82, type: 3}
+  m_PrefabInstance: {fileID: 1418088910561480746}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1551288335
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13234,19 +13247,19 @@ PrefabInstance:
     - target: {fileID: 978821777547769373, guid: d08e550deb9c1044fb5b9000aa9b673b, type: 3}
       propertyPath: 'runAwaySpots.Array.data[0]'
       value: 
-      objectReference: {fileID: 1074065273}
+      objectReference: {fileID: 1074065272}
     - target: {fileID: 978821777547769373, guid: d08e550deb9c1044fb5b9000aa9b673b, type: 3}
       propertyPath: 'runAwaySpots.Array.data[1]'
       value: 
-      objectReference: {fileID: 1074065272}
+      objectReference: {fileID: 1074065271}
     - target: {fileID: 978821777547769373, guid: d08e550deb9c1044fb5b9000aa9b673b, type: 3}
       propertyPath: 'runAwaySpots.Array.data[2]'
       value: 
-      objectReference: {fileID: 1074065271}
+      objectReference: {fileID: 1074065274}
     - target: {fileID: 978821777547769373, guid: d08e550deb9c1044fb5b9000aa9b673b, type: 3}
       propertyPath: 'runAwaySpots.Array.data[3]'
       value: 
-      objectReference: {fileID: 1074065274}
+      objectReference: {fileID: 1074065273}
     - target: {fileID: 3395785689969630384, guid: d08e550deb9c1044fb5b9000aa9b673b, type: 3}
       propertyPath: m_Speed
       value: 10
@@ -13352,6 +13365,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1668822441}
+    - target: {fileID: 8540167891561425466, guid: e81c452067719094988207af10da5d82, type: 3}
+      propertyPath: bobberAnimator
+      value: 
+      objectReference: {fileID: 1546854565}
     - target: {fileID: 8598205052838647479, guid: e81c452067719094988207af10da5d82, type: 3}
       propertyPath: m_Name
       value: FishingRod
@@ -13832,6 +13849,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5883766767363214481, guid: d6a6bdfee09cd9449a2682c0ca8d6f88, type: 3}
+      propertyPath: jumpSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 2be573141cdb9c644b61764f228aa533, type: 3}
     - target: {fileID: 5883766767363214481, guid: d6a6bdfee09cd9449a2682c0ca8d6f88, type: 3}
       propertyPath: carLookCam
       value: 
