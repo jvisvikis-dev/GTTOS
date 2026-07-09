@@ -43,6 +43,11 @@ public class AudioManager : MonoBehaviour
             backgroundMusicObject = audioSource;
     }
 
+    public void PlayBackgroundMusic()
+    {
+        backgroundMusicObject.Play();
+    }
+
     public void StopBackgroundMusic()
     {
         backgroundMusicObject.Stop();

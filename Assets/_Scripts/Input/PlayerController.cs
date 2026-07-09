@@ -199,7 +199,7 @@ public class PlayerController : MonoBehaviour
         itemInHand.transform.parent = itemHolder.transform;
         Vector3 startPos = itemInHand.transform.localPosition;
         Vector3 endPos = Vector3.zero + posOffset;
-        Quaternion startRot = itemInHand.transform.rotation;
+        Quaternion startRot = itemInHand.transform.localRotation;
         Quaternion endRot = Quaternion.Euler(rotation);
         float timer = 0;
         while(timer/equipTime < 1 && itemInHand)

@@ -7,8 +7,6 @@ public class FishingRod : Interactable
 {
     [SerializeField] private Vector3 pickUpOffset;
     [SerializeField] private Vector3 pickUpRotation;
-    [SerializeField] private Vector3 fishOffset;
-    [SerializeField] private Vector3 fishRotation;
     [SerializeField] private float castUpwardsForce = 2f;
     [SerializeField] private float castForce = 5f;
     [SerializeField] private float minWaitTime = 1f;
@@ -21,7 +19,7 @@ public class FishingRod : Interactable
     [SerializeField] private Rigidbody bobberRB;
     [SerializeField] private GameObject bobberHome;
     [SerializeField] private ParticleSystem splashParticles;
-    [SerializeField] private Interactable fishPrefab;
+    [SerializeField] private Fish fishPrefab;
     [SerializeField] private LineRenderer lineRenderer;
     [SerializeField] private AudioClip castingSFX;
     [SerializeField] private AudioClip bobberHitWaterSFX;
@@ -31,6 +29,7 @@ public class FishingRod : Interactable
     private bool isActive;
     private bool fishReady;
     private bool bobberHitWater;
+    private bool firstCatch;
     private void Awake()
     {
         _inputActions = new Controls();
@@ -55,10 +54,20 @@ public class FishingRod : Interactable
             if (fishReady)
             {
                 fishReady = false;
-                Interactable fish = Instantiate(fishPrefab,bobber.transform);
+                Fish fish = Instantiate(fishPrefab,bobber.transform);
                 fish.transform.parent = null;
-                player.PickUp(fish,fishOffset,fishRotation);
-                isActive = false;
+                fish.transform.rotation = Quaternion.Euler(new Vector3(0,0,90));
+                if (!firstCatch)
+                {
+                    firstCatch = true;
+                    fish.FirstCatch();
+                    StartCoroutine(WaitForFirstCatchAnimation(fish));
+                }
+                else
+                {
+                    player.PickUp(fish,fish.FishOffset,fish.FishRotation);
+                }
+                    isActive = false;
             }
             bobberHitWater = false;
             bobberCasted = false;
@@ -126,5 +135,15 @@ public class FishingRod : Interactable
         }
         if(bobberCasted)
             ReadyToCatch();
+    }
+
+    public IEnumerator WaitForFirstCatchAnimation(Fish fish)
+    {
+        AudioManager.Instance.Play3DSound(fish.transform.position, fish.FirstCatchFanFare);
+        AudioManager.Instance.StopBackgroundMusic();
+        yield return new WaitForSeconds(fish.FirstCatchFanFare.length);
+        AudioManager.Instance.PlayBackgroundMusic();
+        fish.FinishAnimation();
+        player.PickUp(fish, fish.FishOffset, fish.FishRotation);
     }
 }

@@ -2514,7 +2514,7 @@ MonoBehaviour:
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
-  m_Antialiasing: 0
+  m_Antialiasing: 3
   m_AntialiasingQuality: 2
   m_StopNaN: 0
   m_Dithering: 0
@@ -6758,6 +6758,55 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8928116012005070630, guid: 4a378afb8de68044f986ae019d0f10ac, type: 3}
   m_PrefabInstance: {fileID: 878395072}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &982718594
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 982718596}
+  - component: {fileID: 982718595}
+  m_Layer: 0
+  m_Name: PostProcessingVolume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &982718595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 982718594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: c91be2abb4c7ce44fb778a3472dbb75c, type: 2}
+--- !u!4 &982718596
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 982718594}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.1619089, y: 0.48042047, z: 14.172451}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &989987386 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3027071335612513535, guid: 23aeb96941b49fb49befd2058dd75b79, type: 3}
@@ -13241,6 +13290,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 48ea3df548ed4084ebe9409a20f20d79, type: 3}
     - target: {fileID: 978821777547769373, guid: d08e550deb9c1044fb5b9000aa9b673b, type: 3}
+      propertyPath: yippeeSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: d6b43e1b9c5a5f04fa8f579714caff56, type: 3}
+    - target: {fileID: 978821777547769373, guid: d08e550deb9c1044fb5b9000aa9b673b, type: 3}
       propertyPath: runAwaySpots.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -14184,3 +14237,4 @@ SceneRoots:
   - {fileID: 1418088910561480746}
   - {fileID: 4442202333009015085}
   - {fileID: 1880590925173004258}
+  - {fileID: 982718596}
