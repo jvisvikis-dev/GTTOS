@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 velocity = Vector3.zero;
     private bool allowedMovement = true;
     public Action jump;
+    public Action itemDropped;
 
     private void Awake()
     {

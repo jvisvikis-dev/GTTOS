@@ -27,6 +27,7 @@ public class FishingRod : Interactable
     private Controls _inputActions;
     private bool bobberCasted;
     private bool isActive;
+    private bool inHand;
     private bool fishReady;
     private bool bobberHitWater;
     private bool firstCatch;
@@ -91,16 +92,18 @@ public class FishingRod : Interactable
     {
         _inputActions.Enable();
         bobber.hitWater += BobberHitWater;
+        player.itemDropped += RodDropped;
     }
 
     private void OnDisable()
     {
         _inputActions.Disable();
         bobber.hitWater -= BobberHitWater;
+        player.itemDropped -= RodDropped;
     }
     public override void Use()
     {
-        isActive = true;
+        StartCoroutine(WaitForActive(0.5f));
         if (player)
             player.PickUp(this, pickUpOffset, pickUpRotation);
     }
@@ -124,6 +127,11 @@ public class FishingRod : Interactable
         fishReady = true;
     }
 
+    public void RodDropped()
+    {
+        inHand = false;
+    }
+
     public IEnumerator WaitForFish()
     {
         float waitTime = UnityEngine.Random.Range(minWaitTime, maxWaitTime);
@@ -145,5 +153,20 @@ public class FishingRod : Interactable
         AudioManager.Instance.PlayBackgroundMusic();
         fish.FinishAnimation();
         player.PickUp(fish, fish.FishOffset, fish.FishRotation);
+    }
+
+    public IEnumerator WaitForActive(float delay)
+    {
+        inHand = true;
+        float timer = 0;
+        while(timer < delay && inHand)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        if(inHand)
+            isActive = true;
+        else
+            isActive = false;
     }
 }
